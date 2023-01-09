@@ -1,0 +1,80 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <title>
+   CodePen - Flat music player
+  </title>
+  <link href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/mediaelement/4.2.7/mediaelementplayer.min.css" rel="stylesheet"/>
+  <link href="{% static './style.css' %}" rel="stylesheet"/>
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+ </head>
+ <body>
+  <!-- partial:index.partial.html -->
+  <html>
+   <head>
+    <meta charset="utf-8"/>
+    <title>
+     Flat music player
+    </title>
+    <style>
+.center {
+  text-align: center;
+  border: 3px solid;
+   margin-top:20px;
+  margin-bottom:20px;
+}
+</style>
+   </head>
+   <body>
+    <div class="contain">
+     <div class="container">
+              <div class="col-md-4"> <button class="btn btn-primary form-control" type="button"><a href="{% url 'crud_ajax' %}">Go TO Crud Operation</a></button></div>
+
+      <div class="music-player">
+<!--       <div class="cover">-->
+<!--        <img alt="" src="{{tracks.album.album_name}}"/>-->
+<!--       </div>-->
+       <br><br><br><br>
+       <div class="center">
+        <center style="">
+        <h1>Track ##
+         {{tracks.track_name}}
+        </h1><br><br>
+         <h4>
+         Artist -{{tracks.album.artist.artist_name}}
+        </h4><br><br>
+        <h3>
+         Album - {{tracks.album}}
+
+        </h3><br><br>
+         <h3>priority - {{tracks.priority}}</h3>
+         </center><br><br>
+         <h3>track pk- {{tracks.id}}</h3>
+       </div>
+       <br><br><br><center><a href="{% url 'tracks' event="previous" priority=tracks.priority %}"><i class="fa fa-step-backward        fa-2x"></i></a> &nbsp; &nbsp; &nbsp;
+         <a href="{% url 'tracks' event="next"  priority=tracks.priority %}"><i class="fa fa-step-forward    fa-2x"></i></a></center>
+
+       <div class="lecteur">
+        <audio class="fc-media" style="width: 100%;">
+         <source src="{% if item.audio_file %}{{item.audio_file.url}} {% else %} {{item.audio_link}} {% endif %}" type="audio/mp3"/>
+        </audio>
+
+       </div>
+      </div>
+     </div>
+    </div>
+   </body>
+  </html>
+  <!-- partial -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mediaelement/4.2.7/mediaelement-and-player.min.js">
+  </script>
+<!--  <script src="{% static './script.js' %}">-->
+<!--  </script>-->
+ </body>
+</html>
